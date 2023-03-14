@@ -1,0 +1,63 @@
+header {
+  position: relative;
+  height: rem(60);
+  border-bottom: rem(1) solid #222222;
+  padding: rem(10) 0;
+  .logo {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    font-size: rem(24);
+    letter-spacing: rem(-1);
+    color: #222222;
+    transform: translate(-50%, -50%);
+  }
+  .menu {
+    &__bar {
+      @include onFlex(center, flex-end);
+      font-size: rem(12);
+    }
+  }
+}
+
+nav {
+  @include onFlex(center, flex-start);
+  height: rem(55);
+  border-bottom: rem(1) solid #dddddd;
+  a {
+    font-size: rem(12);
+    margin-right: rem(20);
+  }
+}
+
+.dim {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  @include onFlex(center, center);
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.popup {
+  width: 40%;
+  height: 60%;
+  min-width: rem(300);
+  min-height: rem(500);
+  background-color: #ffffff;
+  padding: rem(20);
+  &__header {
+    font-size: rem(24);
+  }
+  &__contents {
+    form {
+      input {
+        height: rem(28);
+        border: rem(1) solid #dddddd;
+      }
+    }
+  }
+}
