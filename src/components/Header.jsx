@@ -1,40 +1,51 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
-import { login, logout, onUserStateChange } from '../api/authentication';
+import User from './User';
+import { BsPencilSquare } from 'react-icons/bs';
+import { useAuthContext } from '../context/AuthenicationContext';
 
 export default function Header() {
-  const [user, setUser] = useState();
-
-  useEffect(() => {
-    onUserStateChange((user) => {
-      console.log(user);
-      setUser(user);
-    });
-  });
-  const handleLogin = () => {
-    login().then(setUser);
-  };
-  const handleLogout = () => {
-    logout().then(setUser);
-  };
-
+  const { user, login, logout } = useAuthContext();
   return (
     <header>
       <Link to="/" className="logo">
         Shoppy
       </Link>
-      <div className="menu__bar">
+      <ul className="user">
+        <li>
+          {!user ? (
+            <button className="btn__log" onClick={login}>
+              Login
+            </button>
+          ) : (
+            <button className="btn__log" onClick={logout}>
+              Logout
+            </button>
+          )}
+        </li>
         {!user && (
-          <button className="log__in" onClick={handleLogin}>
-            Login
-          </button>
+          <li>
+            {' '}
+            <button>Join</button>
+          </li>
         )}
         {user && (
-          <button className="log__in" onClick={handleLogout}>
-            Logout
-          </button>
+          <li>
+            Cart(<span>0</span>)
+          </li>
         )}
-      </div>
+
+        {user && user.isAdmin && (
+          <li>
+            <BsPencilSquare className="admin__write" />
+          </li>
+        )}
+        {user && (
+          <li>
+            <User user={user} />
+          </li>
+        )}
+      </ul>
     </header>
   );
 }

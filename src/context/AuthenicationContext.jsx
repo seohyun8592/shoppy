@@ -1,18 +1,22 @@
-import { createContext, useContext } from 'react';
-import authenticationClient from '../api/authenticationClient';
+import { createContext, useContext, useEffect, useState } from 'react';
+import { login, logout, onUserStateChange } from '../api/authentication';
 
-export const AuthenficationCtxt = createContext();
+export const AuthContext = createContext();
 
-const value = new authenticationClient();
-
-export function AuthenficationProvider({ children }) {
+export function AuthContextProvider({ children }) {
+  const [user, setUser] = useState();
+  useEffect(() => {
+    onUserStateChange((user) => {
+      setUser(user);
+    });
+  }, []);
   return (
-    <AuthenficationCtxt.Provider value={{ value }}>
+    <AuthContext.Provider value={{ user, login, logout }}>
       {children}
-    </AuthenficationCtxt.Provider>
+    </AuthContext.Provider>
   );
 }
 
-export function useAuthenficationApi() {
-  return useContext(AuthenficationCtxt);
+export function useAuthContext() {
+  return useContext(AuthContext);
 }
