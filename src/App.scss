@@ -181,7 +181,6 @@ img {
 
 input {
   height: 100%;
-  padding: 0 rem(10);
 }
 
 input,
@@ -209,10 +208,23 @@ button {
 code {
   font-family: 'notokr', sans-serif;
 }
+#root {
+  height: 100%;
+}
 
 .wrap {
   width: 100%;
+  height: 100%;
   padding: 0 5%;
 }
 
-@import 'components/Components';
+.App {
+  height: 100%;
+}
+
+main {
+  height: calc(100% - 115px);
+}
+
+@import 'components/components';
+@import 'pages/pages';

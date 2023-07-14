@@ -36,9 +36,9 @@ export default function Header() {
         )}
 
         {user && user.isAdmin && (
-          <li>
+          <Link to="/products/new">
             <BsPencilSquare className="admin__write" />
-          </li>
+          </Link>
         )}
         {user && (
           <li>

@@ -6,7 +6,8 @@ import {
   signOut,
   onAuthStateChanged,
 } from 'firebase/auth';
-import { getDatabase, ref, get } from 'firebase/database';
+import { getDatabase, ref, get, set } from 'firebase/database';
+import { v4 as uuid } from 'uuid';
 
 const firebaseConfig = {
   apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
@@ -49,5 +50,31 @@ async function adminUser(user) {
         return { ...user, isAdmin };
       }
       return user;
+    });
+}
+
+export function writeUserData(product, image) {
+  const id = uuid();
+  return set(ref(database, `product/${id}`), {
+    ...product,
+    id,
+    image,
+    price: parseInt(product.price),
+    color: product.color.split(','),
+    options: product.options.split(','),
+  });
+}
+
+export function readUserData() {
+  get(ref(database, `users/${id}`))
+    .then((snapshot) => {
+      if (snapshot.exists()) {
+        console.log(snapshot.val());
+      } else {
+        console.log('No data available');
+      }
+    })
+    .catch((error) => {
+      console.error(error);
     });
 }

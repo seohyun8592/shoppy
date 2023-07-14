@@ -1,0 +1,46 @@
+.product {
+  &__new {
+    padding: rem(20);
+    .form {
+      &__area {
+        margin-top: rem(30);
+        input {
+          height: 100%;
+        }
+      }
+      &__wrap {
+        height: rem(50);
+        border: rem(1) solid #dddddd;
+        padding: 0 rem(10);
+        & + .form__wrap {
+          margin-top: rem(10);
+        }
+        &.file {
+          @include onFlex(center, flex-start);
+          input {
+            display: none;
+          }
+          label {
+            display: inline-block;
+            width: rem(100);
+            height: rem(35);
+            text-align: center;
+            line-height: rem(34);
+            background-color: #dddddd;
+            vertical-align: middle;
+          }
+        }
+      }
+    }
+    .btn {
+      &__submit {
+        display: block;
+        width: rem(100);
+        height: rem(35);
+        line-height: rem(34);
+        background-color: #dddddd;
+        margin: rem(15) auto 0;
+      }
+    }
+  }
+}
